@@ -1,5 +1,5 @@
 ## HTTP Client
-An libcurl wrapper for HTTP/HTTPS requests inspired by simplicity of python's requests module.
+This library is an libcurl wrapper for HTTP/HTTPS requests, inspired by simplicity of python's requests module.
 
 ### Structure of Response
 
