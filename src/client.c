@@ -1,4 +1,6 @@
 #include <curl/curl.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "client.h"
 #include "callback.h"
@@ -6,7 +8,6 @@
 Response RequestGET(const char* url, HTTPHeader* headers) {
     hashmap* m = hashmap_create();
     Response res = { NULL, 0, m, 400 };
-
 
     CURL* curl = curl_easy_init();
     if (curl) {
@@ -18,6 +19,8 @@ Response RequestGET(const char* url, HTTPHeader* headers) {
 
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, BodyCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &res);
+
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, "recuests/0.1");
 
         struct curl_slist* cheaders = NULL;
 
@@ -56,12 +59,12 @@ Response RequestPOST(const char* url, HTTPHeader* headers, const char* postData)
     hashmap* m = hashmap_create();
     Response res = { NULL, 0, m, 400 };
 
-
     CURL* curl = curl_easy_init();
     if (curl) {
         CURLcode ccode;
         curl_easy_setopt(curl, CURLOPT_URL, url);
 
+        curl_easy_setopt(curl, CURLOPT_POST, 1L);
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postData);
 
         curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, HeaderCallback);
@@ -69,6 +72,8 @@ Response RequestPOST(const char* url, HTTPHeader* headers, const char* postData)
 
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, BodyCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &res);
+
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, "recuests/0.1");
 
         struct curl_slist* cheaders = NULL;
 
@@ -107,7 +112,6 @@ Response RequestPUT(const char* url, HTTPHeader* headers, const char* postData) 
     hashmap* m = hashmap_create();
     Response res = { NULL, 0, m, 400 };
 
-
     CURL* curl = curl_easy_init();
     if (curl) {
         CURLcode ccode;
@@ -122,6 +126,8 @@ Response RequestPUT(const char* url, HTTPHeader* headers, const char* postData) 
 
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, BodyCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &res);
+
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, "recuests/0.1");
 
         struct curl_slist* cheaders = NULL;
 
@@ -160,7 +166,6 @@ Response RequestDELETE(const char* url, HTTPHeader* headers) {
     hashmap* m = hashmap_create();
     Response res = { NULL, 0, m, 400 };
 
-
     CURL* curl = curl_easy_init();
     if (curl) {
         CURLcode ccode;
@@ -173,6 +178,8 @@ Response RequestDELETE(const char* url, HTTPHeader* headers) {
 
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, BodyCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &res);
+
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, "recuests/0.1");
 
         struct curl_slist* cheaders = NULL;
 
