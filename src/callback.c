@@ -18,7 +18,7 @@ size_t HeaderCallback(void* contents, size_t size, size_t nmemb, void* userdata)
         header[totalSize - 2] = '\0';
 
     char* key = strtok(header, ":");
-    char* val = strtok(key, "");
+    char* val = strtok(header + strlen(key) + 2, "");
 
     if (key == NULL || val == NULL)
         return totalSize;
